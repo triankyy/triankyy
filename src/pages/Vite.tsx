@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import reactLogo from "../assets/icons/react.svg";
 import styles from "../css/Vite.module.css";
 
-export default function Vite(): JSX.Element {
+export default function VitePage(): JSX.Element {
     const [count, setCount] = useState(0);
     useEffect(() => {
         document.title = "Vite + React + TS";
