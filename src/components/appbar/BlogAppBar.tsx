@@ -1,9 +1,11 @@
 import {
     AppBar as MuiAppBar,
     AppBarProps as MuiAppBarProps,
+    Box,
     Container,
     Toolbar
 } from "@mui/material";
+import { cyan, teal } from "@mui/material/colors";
 import { alpha, styled } from "@mui/material/styles";
 import { useState } from "react";
 
@@ -25,6 +27,12 @@ const AppBar = styled(MuiAppBar, {
     backdropFilter: "blur(10px)"
 }));
 
+const GradientDivider = styled(Box)(({ theme }) => ({
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
+    background: `linear-gradient(to right top, ${cyan[500]}, ${teal[200]})`
+}));
+
 export default function CustomBlogAppBar({ children }: Props) {
     const [scrolled, setScrolled] = useState<boolean>(false);
     function handleScroll(): void {
@@ -36,8 +44,10 @@ export default function CustomBlogAppBar({ children }: Props) {
     }
     window.addEventListener("scroll", handleScroll);
     return (
-        <AppBar isScrolled={scrolled}>
-            <Toolbar>
+        <AppBar isScrolled={scrolled} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+            <GradientDivider />
+            <Box sx={{ bgcolor: "primary.main" }} />
+            <Toolbar disableGutters>
                 <Container maxWidth="md">{children}</Container>
             </Toolbar>
         </AppBar>
